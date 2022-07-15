@@ -39,6 +39,9 @@ defmodule PhoenixHeroicons.Fetcher do
       end)
       |> Enum.into(%{})
 
+    # Cleanup temp directory
+    File.rm_rf!(Path.dirname(tmp_working_path))
+
     quote do
       @icons unquote(Macro.escape(icons))
 
