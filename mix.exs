@@ -1,28 +1,50 @@
 defmodule PhoenixHeroicons.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+  @source_url "https://github.com/morinap/phoenix-heroicons.git"
+
   def project do
     [
       app: :phoenix_heroicons,
-      version: "0.1.0",
-      elixir: "~> 1.13",
-      start_permanent: Mix.env() == :prod,
-      deps: deps()
+      version: @version,
+      elixir: "~> 1.7",
+      deps: deps(),
+      description: "Package for rendering Heroicons in Phoenix applications",
+      package: [
+        links: %{
+          "GitHub" => @source_url,
+          "heroicons" => "https://heroicons.com/"
+        },
+        licenses: ["MIT"],
+        maintainers: ["Andrew Morin"]
+      ],
+      docs: [
+        main: "PhoenixHeroicons",
+        source_url: @source_url,
+        source_ref: "v#{@version}",
+        formatters: ["html", "epub"],
+        extras: ["CHANGELOG.md"]
+      ],
+      # Prevent our Fetcher from spitting out warnings
+      xref: [
+        exclude: [:httpc, :public_key]
+      ]
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:phoenix_html, ">= 3.0.0"},
+      {:floki, ">= 0.25.0"},
+      {:castore, ">= 0.0.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 end
