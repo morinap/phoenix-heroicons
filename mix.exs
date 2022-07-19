@@ -42,6 +42,7 @@ defmodule PhoenixHeroicons.MixProject do
   defp deps do
     [
       {:phoenix_html, ">= 3.0.0"},
+      {:phoenix_live_view, ">= 0.16.0"},
       {:floki, ">= 0.25.0"},
       {:castore, ">= 0.0.0"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
