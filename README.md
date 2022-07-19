@@ -20,8 +20,15 @@ end
 
 ## Usage
 
-To render a Heroicon within an `eex` template, simply call `PhoenixHeroicons.svg` with the icon's type and name, for
-example: `outline/bell`:
+To render a Heroicon using in an `heex` template, using a functional component, import `PhoenixHeroicons` into your view
+module and then write:
+
+```
+<.icon name="bell" outline/>
+```
+
+If you want to render a Heroicon without using a functional component, perhaps inside an `eex` template, simply call
+`PhoenixHeroicons.svg` with the icon's type and name, for example: `outline/bell`:
 
 ```
 iex> PhoenixHeroicons.svg("outline/bell")

@@ -10,6 +10,8 @@ defmodule PhoenixHeroicons do
 
   use PhoenixHeroicons.Fetcher
 
+  use Phoenix.Component
+
   @doc """
   Gets an HTML-safe SVG for use in a Phoenix template for the given Heroicon. Any specified attributes will overwrite
   attributes on the root `svg` element.
@@ -44,5 +46,38 @@ defmodule PhoenixHeroicons do
         |> Floki.raw_html()
         |> Phoenix.HTML.raw()
     end
+  end
+
+  @doc """
+  Renders an icon function component. This function delegates to `PhoenixHeroicons.svg/2`.
+
+  ## Options
+
+  Required assigns:
+
+     * `name`: The name of the heroicon to render. This name does not include the `outline` or `solid` type portion
+
+  Optional assigns
+
+    * `outline`: Specifying this assign will render the icon in the `outline` style. If not specified, the `solid` style will be used.
+
+  All other assigns will be added as attributes to the `svg`, so you can specify things like `class`.
+
+  ## Examples
+
+    ```
+    <.icon name="bell" outline/>
+    ```
+
+    ```
+    <.icon name="bell" class="h-6 w-6"/>
+    ```
+  """
+  def icon(assigns) do
+    name = assigns[:name] || raise ArgumentError, "missing :name assign to icon"
+    category = if assigns[:outline], do: "outline", else: "solid"
+    icon_options = assigns_to_attributes(assigns, [:name, :outline])
+
+    ~H[<%= svg("#{category}/#{name}", icon_options) %>]
   end
 end
